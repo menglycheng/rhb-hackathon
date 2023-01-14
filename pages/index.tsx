@@ -6,6 +6,7 @@ import {
   QrCodeIcon,
   WalletIcon,
 } from "@heroicons/react/24/solid";
+import Link from "next/link";
 const Home: NextPage = () => {
   return (
     <div className="flex md:max-w-screen-sm min-h-screen flex-col  my-auto mx-auto py-2 px-10">
@@ -13,9 +14,9 @@ const Home: NextPage = () => {
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="">
-        <h1 className="font-bold text-2xl">Finance</h1>
-        <div className="flex flex-row ">
+      <main className="mt-10">
+        <h1 className="font-bold text-2xl my-5">Finance</h1>
+        <div className="flex flex-row my-5">
           <div className="mx-5 my-4 flex flex-col justify-center items-center">
             <QrCodeIcon className="w-10 bg-blue-200 p-2 rounded-full text-black  " />
             <p className="text-sm pt-2">Pay by QR</p>
@@ -26,12 +27,14 @@ const Home: NextPage = () => {
           </div>
         </div>
         {/* challenge card  */}
-        <div className="w-screen-sm mx-10 rounded-md h-20 bg-black text-white px-6 py-2 flex flex-col justify-center items-left">
-          <p>Using all the potential of your debit card</p>
-          <p className="text-sm text-gray-400">
-            Gain rewards for completing challenges
-          </p>
-        </div>
+        <Link href={"/challenges"}>
+          <div className="w-screen-sm mx-10 rounded-md h-20 bg-black text-white px-6 py-2 flex flex-col justify-center items-left">
+            <p>Using all the potential of your debit card</p>
+            <p className="text-sm text-gray-400">
+              Gain rewards for completing challenges
+            </p>
+          </div>
+        </Link>
         {/* finance Total */}
         <div className="w-screen-sm mx-10 rounded-md my-10 h-20 bg-gray-100 text-black px-6 py-2 flex flex-row  justify-between  items-center">
           <div>
