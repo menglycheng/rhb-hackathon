@@ -1,11 +1,12 @@
 import Head from "next/head";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   CheckBadgeIcon,
   CheckCircleIcon,
   ChevronRightIcon,
+  QueueListIcon,
 } from "@heroicons/react/24/solid";
-const challengeTask = [
+const challengeTask1 = [
   {
     id: 1,
     title: "Save $5 this week",
@@ -25,8 +26,49 @@ const challengeTask = [
     completed: false,
   },
 ];
+const challengeTask2 = [
+  {
+    id: 1,
+    title: "Save $10 this week",
+    points: 10,
+    completed: false,
+  },
+  {
+    id: 2,
+    title: "Spend only $30 this month",
+    points: 10,
+    completed: true,
+  },
+  {
+    id: 3,
+    title: "Have at least $100 in your account",
+    points: 10,
+    completed: false,
+  },
+];
 
 const challenges = () => {
+  const [lvl, setLvl] = React.useState(1);
+  const [char2, setChar2] = React.useState(false);
+  const [cha2, setCha2] = React.useState(challengeTask2);
+  const [open, setOpen] = React.useState(false);
+  const [cha1, setCha1] = React.useState(challengeTask1);
+  const completed = (id: number) => {
+    const newTask = cha1.map((task) => {
+      if (task.id === id) {
+        return { ...task, completed: !task.completed };
+      }
+      return task;
+    });
+    setCha1(newTask);
+  };
+  useEffect(() => {
+    if (cha1.filter((task) => task.completed).length === 3) {
+      setOpen(true);
+      setLvl(lvl + 1);
+    }
+  }, [cha1]);
+
   return (
     <div className="flex md:max-w-screen-sm min-h-screen flex-col  my-auto mx-auto py-2 px-10">
       <Head>
@@ -43,7 +85,7 @@ const challenges = () => {
             <p className="text-3xl text-white font-bold">Guest</p>
           </div>
           <div className="bg-green-600 w-20 h-20 font-bold text-5xl flex justify-center items-center rounded-full">
-            1
+            {lvl}
           </div>
         </div>
         <div className="w-screen-sm flex flex-row mx-10 justify-center items-start">
@@ -73,11 +115,14 @@ const challenges = () => {
         {/* current task */}
         <div className="ml-10 mt-10">
           <p className="text-lg text-black font-semibold">Current</p>
-          {challengeTask.map((task) => (
-            <div className="mt-5">
+          {cha1.map((task) => (
+            <div className="mt-5" key={task.id}>
               {!task.completed && (
                 <>
-                  <div className="w-screen-sm rounded-md h-fit bg-gray-100 text-black px-6 py-2 flex flex-row  justify-between items-center">
+                  <div
+                    className="w-screen-sm rounded-md h-fit bg-gray-100 text-black px-6 py-2 flex flex-row  justify-between items-center"
+                    onClick={() => completed(task.id)}
+                  >
                     <p>{task.title}</p>
                     <CheckCircleIcon
                       className={`w-6 h-6 ${
@@ -89,12 +134,33 @@ const challenges = () => {
               )}
             </div>
           ))}
+          {char2 && (
+            cha2.map((task) => (
+              <div className="mt-5" key={task.id}>
+              {!task.completed && (
+                <>
+                  <div
+                    className="w-screen-sm rounded-md h-fit bg-gray-100 text-black px-6 py-2 flex flex-row  justify-between items-center"
+                    onClick={() => completed(task.id)}
+                  >
+                    <p>{task.title}</p>
+                    <CheckCircleIcon
+                      className={`w-6 h-6 ${
+                        !task.completed && "text-blue-400"
+                      }`}
+                    />
+                  </div>
+                </>
+              )}
+            </div>
+            ))
+          )}
         </div>
 
         {/* complete task */}
         <div className="ml-10 mt-10">
           <p className="text-lg text-black font-semibold">Completed</p>
-          {challengeTask.map((task) => (
+          {cha1.map((task) => (
             <div className="mt-5">
               {task.completed && (
                 <>
@@ -111,6 +177,35 @@ const challenges = () => {
             </div>
           ))}
         </div>
+        {open && (
+            <div className="fixed top-0 left-0 h-screen w-screen flex items-center justify-center">
+              <div className="bg-blue-500 p-6 rounded-lg shadow-lg items-center">
+                <div className="bg-green-600 w-20 h-20 font-bold text-5xl flex justify-center items-center rounded-full text-white ml-12">
+                  {lvl}
+                </div>
+                <h3 className="text-white font-medium ml-10 mb-3">Now Available</h3>
+                <div className="bg-blue-400 grid grid-row grid-center w-1/2 p-2 rounded ml-10 mb-4">
+                  <QueueListIcon className="w-10 p-2 bg-white rounded-full text-blue-500 ml-5" />
+                  <p className="text-white ml-3">2 quests</p>
+                </div>
+                <p className="text-white">Rewards for the next level</p>
+                <div className="flex flex-wrap m-4">
+                  <div className="bg-white h-12 w-12 flex items-center justify-center rounded mr-10">
+                    <p className="text-xl font-bold">?</p>
+                  </div>
+                  <div className="bg-white h-12 w-12 flex items-center justify-center rounded ml-3">
+                    <p className="text-xl font-bold">?</p>
+                  </div>
+                </div>
+                <button className="bg-white text-blue-500 p-2 rounded w-full" onClick={() => {
+                  setOpen(false)
+                  setChar2(true)
+                }}>
+                  Congratulation
+                </button>
+              </div>
+            </div>
+        )}
       </main>
     </div>
   );
