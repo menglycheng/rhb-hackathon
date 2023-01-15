@@ -1,4 +1,4 @@
-mport Head from "next/head";
+import Head from "next/head";
 import React, { useEffect } from "react";
 import {
   CheckBadgeIcon,
@@ -6,7 +6,6 @@ import {
   ChevronRightIcon,
   QueueListIcon,
 } from "@heroicons/react/24/solid";
-import { title } from "process";
 const challengeTask1 = [
   {
     id: 1,
@@ -105,7 +104,7 @@ const challenges = () => {
             )}
           </div>
           <div className="bg-green-600 w-20 h-20 font-bold text-5xl flex justify-center items-center rounded-full">
-            1
+            {lvl}
           </div>
         </div>
         <div className="w-screen-sm flex flex-row mx-10 justify-center items-start">
@@ -116,7 +115,7 @@ const challenges = () => {
               </p>
             </div>
             <div className="bg-green-600 w-20 h-20 font-bold text-5xl flex justify-center items-center rounded-full">
-              1
+              {comp}
             </div>
           </div>
           <div className="w-1/2 my-2 ml-2 rounded-md h-44 bg-black text-white px-6 py-2 flex flex-row  justify-between items-center">
@@ -154,7 +153,7 @@ const challenges = () => {
                       className="w-screen-sm rounded-md h-fit bg-gray-100 text-black px-6 py-2 flex flex-row  justify-between items-center"
                       onClick={() => {
                         completed(task.id);
-                        setComp(comp + 1)
+                        setComp(comp + 1);
                       }}
                     >
                       <p>{task.title}</p>
@@ -268,8 +267,8 @@ const challenges = () => {
                 Congratulation
               </button>
             </div>
-          ))}
-        </div>
+          </div>
+        )}
       </main>
     </div>
   );
