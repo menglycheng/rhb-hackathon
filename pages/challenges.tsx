@@ -42,7 +42,7 @@ const challengeTask2 = [
   },
   {
     id: 3,
-    title: "Have at least $100 in your account",
+    title: "Take a short course about saving",
     points: 10,
     completed: false,
   },
