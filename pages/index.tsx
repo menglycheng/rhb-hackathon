@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import {
+  AcademicCapIcon,
   ChevronRightIcon,
   CreditCardIcon,
   QrCodeIcon,
@@ -25,6 +26,12 @@ const Home: NextPage = () => {
             <WalletIcon className="w-10 bg-blue-700 p-2 rounded-full text-white  " />
             <p className="text-sm pt-2">My Bills</p>
           </div>
+          <Link href={"/leaderboard"}>
+            <div className="mx-5 my-4 flex flex-col justify-center items-center">
+              <AcademicCapIcon className="w-10 bg-blue-200 p-2 rounded-full text-black  " />
+              <p className="text-sm pt-2">Leaderboard</p>
+            </div>
+          </Link>
         </div>
         {/* challenge card  */}
         <Link href={"/challenges"}>

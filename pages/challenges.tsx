@@ -1,4 +1,4 @@
-import Head from "next/head";
+mport Head from "next/head";
 import React, { useEffect } from "react";
 import {
   CheckBadgeIcon,
@@ -105,7 +105,7 @@ const challenges = () => {
             )}
           </div>
           <div className="bg-green-600 w-20 h-20 font-bold text-5xl flex justify-center items-center rounded-full">
-            {lvl}
+            1
           </div>
         </div>
         <div className="w-screen-sm flex flex-row mx-10 justify-center items-start">
@@ -116,7 +116,7 @@ const challenges = () => {
               </p>
             </div>
             <div className="bg-green-600 w-20 h-20 font-bold text-5xl flex justify-center items-center rounded-full">
-              {comp}
+              1
             </div>
           </div>
           <div className="w-1/2 my-2 ml-2 rounded-md h-44 bg-black text-white px-6 py-2 flex flex-row  justify-between items-center">
@@ -268,8 +268,8 @@ const challenges = () => {
                 Congratulation
               </button>
             </div>
-          </div>
-        )}
+          ))}
+        </div>
       </main>
     </div>
   );
